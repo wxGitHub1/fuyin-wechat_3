@@ -1,0 +1,58 @@
+<view class="swiper-container">
+	<block wx:if="{{is_longin}}">
+		<swiper style="height: {{clientHeight+'px'}}" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}" current="{{swiperCurrent}}" bindchange="swiperChange" vertical="{{vertical}}" class="swiper">
+			<swiper-item class="swiper-1 {{clientHeight<=736?'swiper-1-1':''}}">
+				<view class="prompt-top">
+					<image src="{{imgUrls}}" class="prompt-top-image"></image>
+				</view>
+			</swiper-item>
+			<swiper-item class="swiper-2 {{clientHeight<=736?'swiper-1-2':''}}">
+				<view class="prompt-top">
+					<image src="{{imgUrls}}" class="prompt-top-image"></image>
+				</view>
+			</swiper-item>
+			<swiper-item class="swiper-3 {{clientHeight<=736?'swiper-1-3':''}}">
+				<view class="prompt-top">
+					<image src="{{imgUrls}}" class="prompt-top-image"></image>
+				</view>
+			</swiper-item>
+			<swiper-item class="swiper-4 {{clientHeight<=736?'swiper-1-4':''}}">
+				<view class="prompt-top">
+					<image src="{{imgUrls}}" class="prompt-top-image"></image>
+				</view>
+			</swiper-item>
+			<swiper-item class="swiper-5 {{clientHeight<=736?'swiper-1-5':''}}">
+				<view class="prompt-top">
+					<image src="{{imgUrls}}" class="prompt-top-image"></image>
+				</view>
+			</swiper-item>
+			<swiper-item class="swiper-6 {{clientHeight<=736?'swiper-1-6':''}}">
+				<view class="prompt-top">
+					<image src="{{imgUrls}}" class="prompt-top-image"></image>
+				</view>
+			</swiper-item>
+			<swiper-item wx:if="{{guide==3}}" class="swiper-guide1 {{clientHeight<=736?'swiper-1-guide1':''}}"></swiper-item>
+			<swiper-item wx:if="{{guide==1}}" class="swiper-guide2 {{clientHeight<=736?'swiper-1-guide2':''}}"></swiper-item>
+			<swiper-item wx:if="{{guide==2}}" class="swiper-guide3 {{clientHeight<=736?'swiper-1-guide3':''}}"></swiper-item>
+			<swiper-item wx:if="{{guide==4}}" class="swiper-guide4 {{clientHeight<=736?'swiper-1-guide4':''}}"></swiper-item>
+		</swiper>
+		<view class="fixed">
+			<view class="fixed-1" bindtap="Appointment_customization_func">
+				<view>预约</view>
+				<view>定制</view>
+			</view>
+			<view class="fixed-2" bindtap="about_us_func">
+				<view>关于</view>
+				<view>我们</view>
+			</view>
+		</view>
+	</block>
+	<block wx:else>
+		<view class="longin-page" style="height: {{clientHeight+'px'}}">
+			<view class="logoBgImg page-img {{clientHeight>736?'logoBgImg2':''}}"></view>
+			<view class="page1-but {{clientHeight>736?'top-but':''}}">
+				<button type="primary" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" id="login-but">查看影响性</button>
+			</view>
+		</view>
+	</block>
+</view>
