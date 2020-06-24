@@ -31,10 +31,10 @@
 					<image src="{{imgUrls}}" class="prompt-top-image"></image>
 				</view>
 			</swiper-item>
-			<swiper-item wx:if="{{guide==3}}" class="swiper-guide1 {{clientHeight<=736?'swiper-1-guide1':''}}"></swiper-item>
+			<!-- <swiper-item wx:if="{{guide==3}}" class="swiper-guide1 {{clientHeight<=736?'swiper-1-guide1':''}}"></swiper-item>
 			<swiper-item wx:if="{{guide==1}}" class="swiper-guide2 {{clientHeight<=736?'swiper-1-guide2':''}}"></swiper-item>
 			<swiper-item wx:if="{{guide==2}}" class="swiper-guide3 {{clientHeight<=736?'swiper-1-guide3':''}}"></swiper-item>
-			<swiper-item wx:if="{{guide==4}}" class="swiper-guide4 {{clientHeight<=736?'swiper-1-guide4':''}}"></swiper-item>
+			<swiper-item wx:if="{{guide==4}}" class="swiper-guide4 {{clientHeight<=736?'swiper-1-guide4':''}}"></swiper-item> -->
 		</swiper>
 		<view class="fixed">
 			<view class="fixed-1" bindtap="Appointment_customization_func">
@@ -51,7 +51,7 @@
 		<view class="longin-page" style="height: {{clientHeight+'px'}}">
 			<view class="logoBgImg page-img {{clientHeight>736?'logoBgImg2':''}}"></view>
 			<view class="page1-but {{clientHeight>736?'top-but':''}}">
-				<button type="primary" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" id="login-but">查看影响性</button>
+				<button type="primary" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" id="login-but">登录查看</button>
 			</view>
 		</view>
 	</block>

@@ -1,40 +1,36 @@
-
 <my-component my-property='{{titleData}}' />
 <view class="canlendarBgView">
-  <view class="canlendarView">
-    <view class="canlendarTopView">
-      <view class="leftBgView" bindtap="handleCalendar" data-handle="prev">
-        <view class="leftView">《</view>
-      </view>
-      <view class="centerView">{{cur_year || "--"}} 年 {{cur_month || "--"}} 月</view>
-      <view class="rightBgView" bindtap="handleCalendar" data-handle="next">
-        <view class="rightView">》</view>
-      </view>
-    </view>
-    <view class="weekBgView">
-      <view class="weekView" wx:for="{{weeks_ch}}" wx:key="{{index}}" data-idx="{{index}}">{{item}}</view>
-    </view>
-    <view class="dateBgView">
-      <view wx:if="{{hasEmptyGrid}}" class="dateEmptyView" wx:for="{{empytGrids}}" wx:key="{{index}}" data-idx="{{index}}">
-      </view>
-      <view class="dateView" wx:for="{{days}}" wx:key="{{index}}" data-idx="{{index}}"  bindtap="dateSelectAction">
-
-        <view class="datesView {{index == todayIndex ? 'dateSelectView' : ''}}" wx:if="{{todayIndex+1==item}}">
-          <view>{{item}}</view> 
-          <view class="y-yue">已约满</view>
-        </view>
-
-        <view class="datesView {{index == todayIndex ? 'dateSelectView' : ''}}" wx:else>
-          <view>{{item}}</view> 
-          <view class="y-yue" >可预约</view>
-        </view>
-        
-      </view>
-    </view>
-  </view>
-  <!-- <view>点击日期选择</view> -->
+	<view class="canlendarView">
+		<view class="canlendarTopView">
+			<view class="leftBgView" bindtap="handleCalendar" data-handle="prev">
+				<view class="leftView"> 《 </view>
+			</view>
+			<view class="centerView">{{cur_year || "--"}} 年 {{cur_month || "--"}} 月</view>
+			<view class="rightBgView" bindtap="handleCalendar" data-handle="next">
+				<view class="rightView">》</view>
+			</view>
+		</view>
+		<view class="weekBgView">
+			<view class="weekView" wx:for="{{weeks_ch}}" wx:key="{{index}}" data-idx="{{index}}">{{item}}</view>
+		</view>
+		<view class="dateBgView">
+			<view wx:if="{{hasEmptyGrid}}" class="dateEmptyView" wx:for="{{empytGrids}}" wx:key="{{index}}" data-idx="{{index}}">
+			</view>
+			<view class="dateView" wx:for="{{days}}" wx:key="{{index}}" data-idx="{{index}}" bindtap="dateSelectAction">
+				<view class="datesView {{index == todayIndex && to_month==cur_month ? 'dateSelectView' : ''}}">
+					<!-- <view>{{item}}</view> -->
+					<view style="color:#C8C8C8" wx:if="{{todayIndex + 1 > item && to_month==cur_month}}">{{item}}</view>
+					<view wx:else>{{item}}</view>
+					<view class="y-yue" wx:if="{{todayIndex + 1 == item && to_month==cur_month}}">已约满</view>
+					<view class="y-yue" wx:elif="{{todayIndex + 1 < item && todayIndex + 6 > item && to_month==cur_month}}">可预约</view>
+					<view class="y-yue" wx:elif="{{item >= todayIndex + 6 && to_month==cur_month}}">未开放</view>
+				</view>
+			</view>
+		</view>
+	</view>
+	<!-- <view>点击日期选择</view> -->
 </view>
 <!-- 弹出框 -->
 <modal hidden="{{hiddenmodalput}}" title="请输入预约手机号" confirm-text="提交" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm">
-    <input type='number' placeholder="请输入手机号" value="{{yuyue_phone}}" bindblur='userTellInput' auto-focus/>
+	<input type='number' placeholder="请输入手机号" value="{{yuyue_phone}}" bindblur='userTellInput' auto-focus />
 </modal>

@@ -15,6 +15,7 @@ Page({
     hasEmptyGrid: false,
     cur_year: '',
     cur_month: '',
+    to_month: '',
     hiddenmodalput: true,
     yuyue_phone: null,
     yuyue_date: null
@@ -38,14 +39,16 @@ Page({
     this.setData({
       hiddenmodalput: true,
     })
+    console.log(app.globalData.myPhone)
     console.log(that.data.yuyue_phone)
+    console.log(that.data.yuyue_date)
     wx.request({
-      url: 'http://192.168.1.109:80/wx/wxReserve',
+      url: 'http://192.168.1.108:80/wx/wxReserve',
       method: "POST",
       data: {
         phone: app.globalData.myPhone,
         reservePhone:that.data.yuyue_phone,
-        reserveTime: "2020-6-23",
+        reserveTime:that.data.yuyue_date,
       },
       header: {
         "Content-Type": "application/json"
@@ -117,17 +120,21 @@ Page({
    */
   onShareAppMessage: function () {},
   dateSelectAction: function (e) {
+
     this.setData({
       hiddenmodalput: !this.data.hiddenmodalput
     })
+
     var cur_day = e.currentTarget.dataset.idx;
     console.log(e)
     this.setData({
-      todayIndex: cur_day,
+      // todayIndex: cur_day,
       yuyue_date: `${this.data.cur_year}-${this.data.cur_month}-${cur_day + 1}`,
     })
     console.log(`点击的日期:${this.data.cur_year}年${this.data.cur_month}月${cur_day + 1}日`);
+
     console.log(this.data.todayIndex)
+    console.log(this.data.yuyue_date)
   },
 
   setNowDate: function () {
@@ -142,6 +149,7 @@ Page({
     this.setData({
       cur_year: cur_year,
       cur_month: cur_month,
+      to_month: cur_month,
       weeks_ch,
       todayIndex,
     })

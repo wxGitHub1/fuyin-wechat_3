@@ -25,7 +25,7 @@ Page({
   about_us_func:function(){
     var that = this
     that.setData({
-      swiperCurrent: 3
+      swiperCurrent: 5
     })
   },
   // 登录+授权获取手机号
@@ -42,10 +42,10 @@ Page({
           // 发送 res.code 到后台换取 openId, sessionKey, unionId
           console.log("code:" + res.code)
           wx.request({
-            url: 'http://192.168.1.109:80/wx/wxGetPhoneForGongzhonghao',
+            url: 'http://192.168.1.108:80/wx/wxGetPhoneForGongzhonghao',
             method: "POST",
             data: {
-              doctorId: that.data.guide,
+              // doctorId: that.data.guide,
               js_code: res.code,
               encrypted: e.detail.encryptedData,
               iv: e.detail.iv,
@@ -73,7 +73,6 @@ Page({
                 })
                 let Myphone=res.data.data.phoneNumber
                 app.globalData.myPhone=Myphone
-
               }
             },
             fail: function (err) {

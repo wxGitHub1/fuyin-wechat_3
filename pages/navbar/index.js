@@ -6,7 +6,7 @@ Component({
         "bg_color": "white",
         "color": "#000",
         "flag": 1,
-        "name": "我是标题1111"
+        "name": "默认标题"
       }
     },
     commonHeadHeight: {
