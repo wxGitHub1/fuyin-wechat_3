@@ -277,6 +277,7 @@ Page({
   },
   calculateEmptyGrids(year, month) {
     const firstDayOfWeek = this.getFirstDayOfWeek(year, month);
+    console.log(firstDayOfWeek)
     let empytGrids = [];
     if (firstDayOfWeek > 0) {
       for (let i = 0; i < firstDayOfWeek; i++) {
@@ -339,6 +340,8 @@ Page({
         cur_month: newMonth
       })
     }
+    console.log(this.data.todayIndex+1)
+
   }
 })
 // Page({
