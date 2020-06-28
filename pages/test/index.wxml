@@ -46,7 +46,7 @@
 					<!-- <view>点击日期选择</view> -->
 				</view>
 				<image src="/images/img_fgdjsfgkjdf.png" class="tit-img-2 "></image>
-				<map id="map" covers="{{covers}}" longitude="{{longitude}}" latitude="{{latitude}}" scale="16" show-compass="true">
+				<map  class="map {{clientHeight>=736?'map2':''}}" covers="{{covers}}" longitude="{{longitude}}" latitude="{{latitude}}" scale="16" show-compass="true">
 					<view class="cover-view">
 						<view class="flex-item demo-text-1" bindtap="daohang">导航</view>
 					</view>
