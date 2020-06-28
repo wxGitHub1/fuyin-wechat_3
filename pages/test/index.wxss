@@ -19,13 +19,16 @@ swiper {
   margin: 0 auto;
   margin-bottom: 24rpx;
 }
-.swiper-container .swiper #map {
+.swiper-container .swiper .map {
   width: 590rpx;
   height: 150rpx;
   margin-top: 24rpx;
   display: block;
   margin: 0 auto;
   position: relative;
+}
+.swiper-container .swiper .map2{
+  height: 350rpx;
 }
 /********地图按钮样式********/
 .cover-view {

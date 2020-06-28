@@ -26,7 +26,6 @@ Page({
     cur_month: '',
     to_month: '',
     hiddenmodalput: true,
-    yuyue_phone: null,
     yuyue_date: null,
     longitude: 108.9483207500,
     latitude: 34.3491318800,
@@ -205,23 +204,16 @@ Page({
   },
   dateSelectAction: function (e) {
     var that = this
-    // this.setData({
-    //   hiddenmodalput: !this.data.hiddenmodalput
-    // })
-
     var cur_day = e.currentTarget.dataset.idx;
-    console.log(e)
-    this.setData({
+    // console.log(e)
+    that.setData({
       // todayIndex: cur_day,
-      yuyue_date: `${this.data.cur_year}-${this.data.cur_month}-${cur_day + 1}`,
+      yuyue_date: `${that.data.cur_year}-${that.data.cur_month}-${cur_day + 1}`,
     })
-    console.log(`点击的日期:${this.data.cur_year}年${this.data.cur_month}月${cur_day + 1}日`);
+    console.log(`点击的日期:${that.data.cur_year}年${that.data.cur_month}月${cur_day + 1}日`);
 
     // console.log(this.data.todayIndex)
-    console.log(this.data.yuyue_date)
-    
     console.log(app.globalData.myPhone)
-    console.log(that.data.yuyue_phone)
     console.log(that.data.yuyue_date)
     wx.request({
       url: 'http://192.168.1.108:80/wx/wxReserve',
