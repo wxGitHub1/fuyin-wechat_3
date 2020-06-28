@@ -75,11 +75,12 @@ Page({
         success: res => {
           // 发送 res.code 到后台换取 openId, sessionKey, unionId
           console.log("code:" + res.code)
+          console.log("医生:"+that.data.guide)
           wx.request({
-            url: 'http://192.168.1.108:80/wx/wxGetPhoneForGongzhonghao',
+            url: app.globalData.serverUrl + '/wx/wxGetPhoneForGongzhonghao',
             method: "POST",
             data: {
-              // doctorId: that.data.guide,
+              doctorId: that.data.guide,
               js_code: res.code,
               encrypted: e.detail.encryptedData,
               iv: e.detail.iv,
@@ -105,8 +106,8 @@ Page({
                 that.setData({
                   is_longin: true
                 })
-                let Myphone=res.data.data.phoneNumber
-                app.globalData.myPhone=Myphone
+                let Myphone = res.data.data.phoneNumber
+                app.globalData.myPhone = Myphone
               }
             },
             fail: function (err) {
@@ -161,33 +162,33 @@ Page({
       }
     })
     wx.checkSession({
-        success() {
-          //session_key 未过期，并且在本生命周期一直有效
+      success() {
+        //session_key 未过期，并且在本生命周期一直有效
+        that.setData({
+          is_longin: true
+        })
+      },
+      fail() {
+        // session_key 已经失效，需要重新执行登录流程
+        // wx.login() //重新登录
+        // var today = new Date();
+        // var today_time = that.FormatDate(today);
+        // console.log(today_time)
+        // if (today_time >= '2020-4-22') {console.log('活动已结束');}else{}
+        var thetime = '2020-04-23 12:00:00';
+        var d = new Date(Date.parse(thetime.replace(/-/g, "/")));
+        var curDate = new Date();
+        if (d <= curDate) {
+          that.setData({
+            is_longin: false
+          })
+        } else {
           that.setData({
             is_longin: true
           })
-        },
-        fail() {
-          // session_key 已经失效，需要重新执行登录流程
-          // wx.login() //重新登录
-          // var today = new Date();
-          // var today_time = that.FormatDate(today);
-          // console.log(today_time)
-          // if (today_time >= '2020-4-22') {console.log('活动已结束');}else{}
-          var thetime = '2020-04-23 12:00:00';
-          var d = new Date(Date.parse(thetime.replace(/-/g, "/")));
-          var curDate = new Date();
-          if (d <= curDate) {
-            that.setData({
-              is_longin: false
-            })
-          } else {
-            that.setData({
-              is_longin: true
-            })
-          }
         }
-      }),
+      }
+    }),
       // console.log("app传输过来" + this.data.guide)
       this.setNowDate();
   },
@@ -195,10 +196,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function (res) {
-    var that=this
+    var that = this
     return {
       title: '让每个孩子更健康的发育',
-      path: '/pages/test/index?id='+that.data.guide,
+      path: '/pages/test/index?id=' + that.data.guide,
       imageUrl: '/images/IMG_20200616_155844.jpg' //这个是分享的图片
     }
   },
@@ -216,12 +217,12 @@ Page({
     console.log(app.globalData.myPhone)
     console.log(that.data.yuyue_date)
     wx.request({
-      url: 'http://192.168.1.108:80/wx/wxReserve',
+      url: app.globalData.serverUrl + '/wx/wxReserve',
       method: "POST",
       data: {
         phone: app.globalData.myPhone,
-        reservePhone:app.globalData.myPhone,
-        reserveTime:that.data.yuyue_date,
+        reservePhone: app.globalData.myPhone,
+        reserveTime: that.data.yuyue_date,
       },
       header: {
         "Content-Type": "application/json"

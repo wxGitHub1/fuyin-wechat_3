@@ -1,7 +1,7 @@
 //app.js
 App({
   globalData: {
-    serverUrl: "https://fuyinkangfu.com",
+    serverUrl: "https://fuyinkangfu.com:8055",
     guide: 1,
     navHeight:null,
     navTop:null,

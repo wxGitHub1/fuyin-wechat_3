@@ -12,24 +12,29 @@ swiper {
   /* height: 100rpx; */
   position: relative;
 }
+
 .swiper-container .swiper .tit-img-2 {
   width: 590rpx;
   height: 376rpx;
   display: block;
   margin: 0 auto;
+  margin-top: 50rpx;
   margin-bottom: 24rpx;
 }
+
 .swiper-container .swiper .map {
   width: 590rpx;
-  height: 150rpx;
+  height: 100rpx;
   margin-top: 24rpx;
   display: block;
   margin: 0 auto;
   position: relative;
 }
-.swiper-container .swiper .map2{
-  height: 350rpx;
+
+.swiper-container .swiper .map2 {
+  height: 150rpx;
 }
+
 /********地图按钮样式********/
 .cover-view {
   position: absolute;
@@ -37,13 +42,15 @@ swiper {
   bottom: 10rpx;
   box-sizing: border-box;
 }
+
 .demo-text-1 {
-  background:#22A1FF;
+  background: #22A1FF;
   padding: 20rpx 40rpx;
   color: #fff;
   border-radius: 20%;
   font-size: 30rpx;
 }
+
 /****/
 .swiper-container .longin-page {
   width: 100%;
@@ -104,14 +111,14 @@ swiper {
 
 .swiper-container .swiper .swiper-2 {
   /* background: url(https://fuyinkangfu.com:8085/files/wx/big/big-2.png) no-repeat; */
-  background: #000;
+  background: #A1BA50;
   background-size: 100% 100%;
   box-sizing: border-box;
 }
 
 .swiper-container .swiper .swiper-3 {
   /* background: url(https://fuyinkangfu.com:8085/files/wx/big/big-3.png) no-repeat; */
-background: #A1BA50;
+  background: #A1BA50;
   background-size: 100% 100%;
   box-sizing: border-box;
 }
@@ -231,15 +238,18 @@ background: #A1BA50;
   background: url(https://fuyinkangfu.com:8085/files/wx/mini/mini-1-4.png) no-repeat;
   background-size: 100% 100%;
 }
+
 /**悬浮按钮***/
-.fixed{
+.fixed {
   position: fixed;
   bottom: 20rpx;
   right: 20rpx;
   /* background: rgb(189, 205, 209); */
 }
-.fixed .fixed-1,.fixed .fixed-2{
-  background:#85BEF9;
+
+.fixed .fixed-1,
+.fixed .fixed-2 {
+  background: #85BEF9;
   padding: 20rpx;
   width: 80rpx;
   height: 80rpx;
@@ -248,34 +258,45 @@ background: #A1BA50;
   color: #fff;
   font-size: 25rpx;
 }
-.fixed .fixed-1 view,.fixed .fixed-2 view{
+
+.fixed .fixed-1 view,
+.fixed .fixed-2 view {
   line-height: 40rpx;
 }
-.fixed .fixed-2{
+
+.fixed .fixed-2 {
   margin-top: 20rpx;
   background: #FCB830;
 }
+
 /**视频设置**/
-#myVideo{
-  width:100%;
-  height:100%;
+#myVideo {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  height:424rpx;
+  width: 100%;
+  margin: auto;
 }
+
 /**日期设置**/
 /* pages/calendar/calendar.wxss */
- 
+
 .canlendarBgView {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
- 
+
 .canlendarView {
   color: #fff;
   display: flex;
   flex-direction: column;
 }
- 
+
 .canlendarTopView {
   height: 80rpx;
   font-size: 28rpx;
@@ -284,14 +305,14 @@ background: #A1BA50;
   align-items: center;
   justify-content: center;
 }
- 
+
 .leftBgView {
   text-align: right;
   height: 80rpx;
   display: flex;
   flex-direction: row-reverse;
 }
- 
+
 .leftView {
   width: 80rpx;
   height: 100%;
@@ -300,7 +321,7 @@ background: #A1BA50;
   align-items: center;
   justify-content: center;
 }
- 
+
 .centerView {
   width: 50%;
   height: 80rpx;
@@ -310,13 +331,13 @@ background: #A1BA50;
   align-items: center;
   justify-content: center;
 }
- 
+
 .rightBgView {
   height: 80rpx;
   display: flex;
   flex-direction: row;
 }
- 
+
 .rightView {
   width: 80rpx;
   height: 100%;
@@ -325,7 +346,7 @@ background: #A1BA50;
   align-items: center;
   justify-content: center;
 }
- 
+
 .weekBgView {
   height: 50rpx;
   line-height: 50rpx;
@@ -335,20 +356,20 @@ background: #A1BA50;
   justify-content: center;
   align-items: center;
 }
- 
+
 .weekView {
   flex-grow: 1;
   text-align: center;
   font-size: 28rpx;
 }
- 
+
 .dateBgView {
   height: 500rpx;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
- 
+
 .dateEmptyView {
   width: 107.16rpx;
   color: #fff;
@@ -356,18 +377,19 @@ background: #A1BA50;
   align-items: center;
   justify-content: center;
 }
- 
+
 .dateView {
   width: 107.16rpx;
+  height: 107.16rpx;
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
 }
- 
+
 .datesView {
-  width:100%;
-  height:100%;
+  width: 100%;
+  height: 100%;
   color: #fff;
   font-size: 26rpx;
   font-weight: 200;
@@ -375,9 +397,9 @@ background: #A1BA50;
   text-align: center;
   align-items: center;
   justify-content: center;
-  flex-direction:column;
+  flex-direction: column;
 }
- 
+
 .dateSelectView {
   border-radius: 50%;
   position: relative;
@@ -386,6 +408,7 @@ background: #A1BA50;
   color: #000;
   background-color: #fff;
 }
+
 /* .dateSelectView .y-yue{
   font-size: 20rpx;
 } */
