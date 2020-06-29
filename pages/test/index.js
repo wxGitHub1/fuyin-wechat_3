@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    is_longin: true,
+    is_longin: false,
     swiperCurrent: 0,
     interval: 300,
     duration: 500,
@@ -34,9 +34,9 @@ Page({
       longitude: 108.9483207500,
       iconPath: '/images/location.png'
     }],
-    keyuyue:8,//实际预约时间为6天
-    weikaifang:14,//实际未开放时间为6天
-    ke_wei_jiange:6,//预约时间和未开放时间间隔为6天
+    keyuyue: 8, //实际预约时间为6天
+    weikaifang: 14, //实际未开放时间为6天
+    ke_wei_jiange: 6, //预约时间和未开放时间间隔为6天
   },
   //导航
   daohang: function () {
@@ -78,9 +78,9 @@ Page({
         success: res => {
           // 发送 res.code 到后台换取 openId, sessionKey, unionId
           console.log("code:" + res.code)
-          console.log("医生:"+that.data.guide)
+          console.log("医生:" + that.data.guide)
           wx.request({
-            url: app.globalData.serverUrl + '/wx/wxGetPhoneForGongzhonghao',
+            url: app.globalData.serverUrl + '/wx/wxGetPhoneForGongzhonghao', //app.globalData.serverUrl + 
             method: "POST",
             data: {
               doctorId: that.data.guide,
@@ -165,33 +165,33 @@ Page({
       }
     })
     wx.checkSession({
-      success() {
-        //session_key 未过期，并且在本生命周期一直有效
-        that.setData({
-          is_longin: true
-        })
-      },
-      fail() {
-        // session_key 已经失效，需要重新执行登录流程
-        // wx.login() //重新登录
-        // var today = new Date();
-        // var today_time = that.FormatDate(today);
-        // console.log(today_time)
-        // if (today_time >= '2020-4-22') {console.log('活动已结束');}else{}
-        var thetime = '2020-04-23 12:00:00';
-        var d = new Date(Date.parse(thetime.replace(/-/g, "/")));
-        var curDate = new Date();
-        if (d <= curDate) {
+        success() {
+          //session_key 未过期，并且在本生命周期一直有效
           that.setData({
             is_longin: false
           })
-        } else {
-          that.setData({
-            is_longin: true
-          })
+        },
+        fail() {
+          // session_key 已经失效，需要重新执行登录流程
+          // wx.login() //重新登录
+          // var today = new Date();
+          // var today_time = that.FormatDate(today);
+          // console.log(today_time)
+          // if (today_time >= '2020-4-22') {console.log('活动已结束');}else{}
+          var thetime = '2020-04-23 12:00:00';
+          var d = new Date(Date.parse(thetime.replace(/-/g, "/")));
+          var curDate = new Date();
+          if (d <= curDate) {
+            that.setData({
+              is_longin: false
+            })
+          } else {
+            that.setData({
+              is_longin: true
+            })
+          }
         }
-      }
-    }),
+      }),
       // console.log("app传输过来" + this.data.guide)
       this.setNowDate();
   },
@@ -208,52 +208,154 @@ Page({
   },
   dateSelectAction: function (e) {
     var that = this
-    var cur_day = e.currentTarget.dataset.idx;
+    var cur_day = e.currentTarget.dataset.idx.day;
+    var cur_day_name = e.currentTarget.dataset.idx.name;
     console.log(e)
     that.setData({
       // todayIndex: cur_day,
-      yuyue_date: `${that.data.cur_year}-${that.data.cur_month}-${cur_day + 1}`,
+      yuyue_date: `${that.data.cur_year}-${that.data.cur_month}-${cur_day}`,
     })
-    console.log(`点击的日期:${that.data.cur_year}年${that.data.cur_month}月${cur_day + 1}日`);
-
-    
+    console.log(`点击的日期:${that.data.cur_year}年${that.data.cur_month}月${cur_day}日`);
 
 
-    // console.log(this.data.todayIndex)
-    console.log(app.globalData.myPhone)
-    console.log(that.data.yuyue_date)
-    wx.request({
-      url: app.globalData.serverUrl + '/wx/wxReserve',
-      method: "POST",
-      data: {
-        phone: app.globalData.myPhone,
-        reservePhone: app.globalData.myPhone,
-        reserveTime: that.data.yuyue_date,
-      },
-      header: {
-        "Content-Type": "application/json"
-      },
-      success: function (res) {
-        console.log(res)
-        if (res.data.returnCode != 0) {
-          wx.showToast({
-            title: "预约失败！",
-            icon: 'warning',
-            duration: 2000
-          })
-        } else {
+
+
+    // wx.showModal({
+    //   title: '温馨提示',
+    //   content: '是否修改日期？',
+    //   success (res) {
+    //     if (res.confirm) {
+
+
+
+    //       console.log('用户点击确定')
+
+
+
+    //     } else if (res.cancel) {
+    //       console.log('用户点击取消')
+    //     }
+    //   }
+    // })
+
+
+    if (cur_day_name != "" && cur_day_name != "已约满") {
+
+      wx.request({
+        url: app.globalData.serverUrl + '/wx/wxCheckReserveTime',
+        method: "POST",
+        data: {
+          doctorId: that.data.guide,
+          phone: app.globalData.myPhone,
+          reservePhone: app.globalData.myPhone,
+          reserveTime: that.data.yuyue_date,
+        },
+        header: {
+          "Content-Type": "application/json"
+        },
+        success: function (res) {
           console.log(res)
-          wx.showToast({
-            title: '预约成功！',
-            icon: 'success',
-            duration: 2000
-          })
+          if (res.data.returnCode != 0) {
+            // wx.showToast({
+            //   title: res.data.returnMsg,
+            //   icon: 'warning',
+            //   duration: 2000
+            // })
+            wx.showModal({
+              title: '温馨提示',
+              content: '是否修改日期？',
+              success(res) {
+                if (res.confirm) {
+
+                  wx.request({
+                    url: app.globalData.serverUrl + '/wx/wxReserve', // app.globalData.serverUrl + '/wx/wxReserve',
+                    method: "POST",
+                    data: {
+                      doctorId: that.data.guide,
+                      phone: app.globalData.myPhone,
+                      reservePhone: app.globalData.myPhone,
+                      reserveTime: that.data.yuyue_date,
+                    },
+                    header: {
+                      "Content-Type": "application/json"
+                    },
+                    success: function (res) {
+                      console.log(res)
+                      if (res.data.returnCode != 0) {
+                        wx.showToast({
+                          title: res.data.returnMsg,
+                          icon: 'warning',
+                          duration: 2000
+                        })
+                      } else {
+                        console.log(res)
+                        wx.showToast({
+                          title: '预约成功！',
+                          icon: 'success',
+                          duration: 2000
+                        })
+                        that.calculateDays(that.data.cur_year, that.data.cur_month)
+                      }
+                    },
+                    fail: function (err) {
+                      console.log(err)
+                    }
+                  })
+
+                  console.log('用户点击确定')
+
+                } else if (res.cancel) {
+
+                  console.log('用户点击取消')
+
+                }
+              }
+            })
+          } else {
+            wx.request({
+              url: app.globalData.serverUrl + '/wx/wxReserve', // '/wx/wxReserve',
+              method: "POST",
+              data: {
+                doctorId: that.data.guide,
+                phone: app.globalData.myPhone,
+                reservePhone: app.globalData.myPhone,
+                reserveTime: that.data.yuyue_date,
+              },
+              header: {
+                "Content-Type": "application/json"
+              },
+              success: function (res) {
+                console.log(res)
+                if (res.data.returnCode != 0) {
+                  wx.showToast({
+                    title: res.data.returnMsg,
+                    icon: 'warning',
+                    duration: 2000
+                  })
+                } else {
+                  console.log(res)
+                  wx.showToast({
+                    title: '预约成功！',
+                    icon: 'success',
+                    duration: 2000
+                  })
+                  that.calculateDays(that.data.cur_year, that.data.cur_month)
+                }
+              },
+              fail: function (err) {
+                console.log(err)
+              }
+            })
+
+          }
+        },
+        fail: function (err) {
+          console.log(err)
         }
-      },
-      fail: function (err) {
-        console.log(err)
-      }
-    })
+      })
+
+
+    }
   },
 
   setNowDate: function () {
@@ -272,22 +374,21 @@ Page({
       weeks_ch,
       todayIndex,
     })
-    console.log(this.data)
-    console.log(this.data.todayIndex+1)
-    console.log(this.data.days.length)
+    // console.log(this.data)
+    // console.log(this.data.todayIndex+1)
+    // console.log(this.data.days.length)
     // console.log(this.data.days.length - (this.data.todayIndex-1 + this.data.keyuyue) < this.data.ke_wei_jiange)
     // if(this.data.days.length - (this.data.todayIndex-1) < this.data.ke_wei_jiange){
     //   this.data.days.length - (this.data.todayIndex-1 + this.data.keyuyue)
     //   console.log(this.data.days.length - (this.data.todayIndex-1 + this.data.keyuyue))
     // }
-    if(this.data.days.length - (this.data.todayIndex+1) < this.data.ke_wei_jiange){
-      console.log(this.data.ke_wei_jiange - (this.data.days.length - (this.data.todayIndex+1)))
-      let sheyu=this.data.ke_wei_jiange - (this.data.days.length - (this.data.todayIndex+1))
-      this.setData({
-        sheyuyuyueshijian: sheyu,
-      })
-
-    }
+    // if(this.data.days.length - (this.data.todayIndex+1) < this.data.ke_wei_jiange){
+    //   console.log(this.data.ke_wei_jiange - (this.data.days.length - (this.data.todayIndex+1)))
+    //   let sheyu=this.data.ke_wei_jiange - (this.data.days.length - (this.data.todayIndex+1))
+    //   this.setData({
+    //     sheyuyuyueshijian: sheyu,
+    //   })
+    // }
 
   },
 
@@ -316,14 +417,44 @@ Page({
     }
   },
   calculateDays(year, month) {
-    let days = [];
-    const thisMonthDays = this.getThisMonthDays(year, month);
-    for (let i = 1; i <= thisMonthDays; i++) {
-      days.push(i);
-    }
-    this.setData({
-      days
-    });
+    // let days = [];
+    // const thisMonthDays = this.getThisMonthDays(year, month);
+    // for (let i = 1; i <= thisMonthDays; i++) {
+    //   days.push(i);
+    // }
+    // this.setData({
+    //   days
+    // });
+    var that = this
+    wx.request({
+      url: 'http://192.168.1.108:10550/wx/getWxReserveDate', //app.globalData.serverUrl + 
+      method: "POST",
+      data: {
+        year: year,
+        month: month,
+      },
+      header: {
+        "Content-Type": "application/json"
+      },
+      success: function (res) {
+        console.log(res)
+        if (res.data.returnCode != 0) {
+          wx.showToast({
+            title: res.data.returnMsg,
+            icon: 'warning',
+            duration: 2000
+          })
+        } else {
+          that.setData({
+            days: res.data.data
+          });
+        }
+      },
+      fail: function (err) {
+        console.log(err)
+      }
+    })
+
   },
   handleCalendar(e) {
     const handle = e.currentTarget.dataset.handle;
@@ -361,8 +492,8 @@ Page({
         cur_month: newMonth
       })
     }
-    console.log( this.data.to_month)//当前月份
-    console.log( this.data.cur_month)//改变的月份
+    console.log(this.data.to_month) //当前月份
+    console.log(this.data.cur_month) //改变的月份
   }
 })
 // Page({
