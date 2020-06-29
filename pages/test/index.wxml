@@ -35,21 +35,51 @@
 						<view class="dateBgView">
 							<view wx:if="{{hasEmptyGrid}}" class="dateEmptyView" wx:for="{{empytGrids}}" wx:key="{{index}}" data-idx="{{index}}">
 							</view>
-							<view class="dateView" wx:for="{{days}}" wx:key="{{index}}">
 
-								<view class="datesView " wx:if="{{todayIndex + 1 > item && to_month==cur_month}}">
+							<view class="dateView" wx:for="{{days}}" wx:key="{{index}}">
+							
+								<view class="datesView " wx:if="{{to_month > cur_month }}"> <!--当前月小于本月-->
 									<view style="color:#C8C8C8">{{item}}</view>
 								</view>
-								
-								<view class="datesView {{index == todayIndex && to_month==cur_month ? 'dateSelectView' : ''}}" wx:else data-idx="{{index}}" bindtap="dateSelectAction">
-								
-									<view>{{item}}</view>
-									<view class="y-yue" wx:if="{{todayIndex + 1 == item && to_month==cur_month}}">已约满</view>
-									<view class="y-yue" wx:elif="{{todayIndex + 1 < item && todayIndex + 6 > item && to_month==cur_month}}">可预约</view>
-									<view class="y-yue" wx:elif="{{item >= todayIndex + 6 && to_month==cur_month}}">未开放</view>
+
+								<view class="datesView {{index == todayIndex ? 'dateSelectView' : ''}}" wx:elif="{{ to_month == cur_month }}" data-idx="{{index}}" bindtap="dateSelectAction"><!--当前月等于本月-->
+
+									<view style="color:#C8C8C8" wx:if="{{todayIndex + 1 > item }}">{{item}}</view>
+									<view wx:else>{{item}}</view>
+
+									<view wx:if="{{todayIndex + 1 == item }}">已约满</view>
+									<view wx:elif="{{todayIndex + 1 < item && todayIndex + keyuyue > item }}">可预约</view>
+									<view wx:elif="{{item >= todayIndex + keyuyue && item < todayIndex + weikaifang}}" style="color:#C8C8C8">未开放</view>
 
 								</view>
+
+								<view class="datesView " wx:elif="{{to_month < cur_month}}" data-idx="{{index}}" bindtap="dateSelectAction"><!--当前月大于本月-->
+									<view>{{item}}</view>
+									<view wx:if="{{ sheyuyuyueshijian >= item &&  to_month+1 == cur_month}}">可预约</view>
+								</view>
+
+
+								<!-- <view class="datesView " wx:elif="{{}}">
+									<view>{{item}}</view>
+									<view>已约满</view>
+								</view> -->
+
+								<!-- <view class="datesView" wx:elif="{{}}" >
+									<view>{{item}}</view>
+									<view>可预约</view>
+								</view> -->
+
+								<!-- <view class="datesView" wx:elif="{{ && to_month==cur_month}}">
+									<view>{{item}}</view>
+									<view style="color:#C8C8C8"></view>
+								</view> -->
+
+								<!-- <view class="datesView" wx:else>
+									<view style="color:#C8C8C8">{{item}}</view>
+								</view> -->
+
 							</view>
+
 						</view>
 					</view>
 					<!-- <view>点击日期选择</view> -->

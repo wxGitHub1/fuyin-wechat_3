@@ -33,7 +33,10 @@ Page({
       latitude: 34.3491318800,
       longitude: 108.9483207500,
       iconPath: '/images/location.png'
-    }]
+    }],
+    keyuyue:8,//实际预约时间为6天
+    weikaifang:14,//实际未开放时间为6天
+    ke_wei_jiange:6,//预约时间和未开放时间间隔为6天
   },
   //导航
   daohang: function () {
@@ -206,12 +209,15 @@ Page({
   dateSelectAction: function (e) {
     var that = this
     var cur_day = e.currentTarget.dataset.idx;
-    // console.log(e)
+    console.log(e)
     that.setData({
       // todayIndex: cur_day,
       yuyue_date: `${that.data.cur_year}-${that.data.cur_month}-${cur_day + 1}`,
     })
     console.log(`点击的日期:${that.data.cur_year}年${that.data.cur_month}月${cur_day + 1}日`);
+
+    
+
 
     // console.log(this.data.todayIndex)
     console.log(app.globalData.myPhone)
@@ -267,6 +273,22 @@ Page({
       todayIndex,
     })
     console.log(this.data)
+    console.log(this.data.todayIndex+1)
+    console.log(this.data.days.length)
+    // console.log(this.data.days.length - (this.data.todayIndex-1 + this.data.keyuyue) < this.data.ke_wei_jiange)
+    // if(this.data.days.length - (this.data.todayIndex-1) < this.data.ke_wei_jiange){
+    //   this.data.days.length - (this.data.todayIndex-1 + this.data.keyuyue)
+    //   console.log(this.data.days.length - (this.data.todayIndex-1 + this.data.keyuyue))
+    // }
+    if(this.data.days.length - (this.data.todayIndex+1) < this.data.ke_wei_jiange){
+      console.log(this.data.ke_wei_jiange - (this.data.days.length - (this.data.todayIndex+1)))
+      let sheyu=this.data.ke_wei_jiange - (this.data.days.length - (this.data.todayIndex+1))
+      this.setData({
+        sheyuyuyueshijian: sheyu,
+      })
+
+    }
+
   },
 
   getThisMonthDays(year, month) {
@@ -277,7 +299,6 @@ Page({
   },
   calculateEmptyGrids(year, month) {
     const firstDayOfWeek = this.getFirstDayOfWeek(year, month);
-    console.log(firstDayOfWeek)
     let empytGrids = [];
     if (firstDayOfWeek > 0) {
       for (let i = 0; i < firstDayOfWeek; i++) {
@@ -340,8 +361,8 @@ Page({
         cur_month: newMonth
       })
     }
-    console.log(this.data.todayIndex+1)
-
+    console.log( this.data.to_month)//当前月份
+    console.log( this.data.cur_month)//改变的月份
   }
 })
 // Page({
