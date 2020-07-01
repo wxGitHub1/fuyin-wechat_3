@@ -1,7 +1,6 @@
 /* pages/index/home.wxss */
 swiper {
   height: 100%;
-
 }
 
 .swiper-container {
@@ -18,8 +17,8 @@ swiper {
   height: 376rpx;
   display: block;
   margin: 0 auto;
-  margin-top: 50rpx;
-  margin-bottom: 24rpx;
+  /* margin-top: 50rpx; */
+  margin-bottom: 20rpx;
 }
 
 .swiper-container .swiper .map {
@@ -64,14 +63,14 @@ swiper {
 .swiper-container .longin-page .logoBgImg {
   width: 100%;
   height: 100%;
-  background: url(https://fuyinkangfu.com:8085/files/wx/1-1.jpg) no-repeat;
+  background: url(https://fuyinkangfu.com:8085/files/wx/logo.png) no-repeat;
   background-size: 100% 100%;
 }
 
 .swiper-container .longin-page .logoBgImg2 {
   width: 100%;
   height: 100%;
-  background: url(https://fuyinkangfu.com:8085/files/wx/1.jpg) no-repeat;
+  background: url(https://fuyinkangfu.com:8085/files/wx/logo-1.png) no-repeat;
   background-size: 100% 100%;
 }
 
@@ -170,7 +169,7 @@ swiper {
   width: 100%;
   position: absolute;
   /* bottom: 42rpx; */
-  bottom: 161rpx;
+  bottom: 461rpx;
 }
 
 #login-but {
@@ -276,7 +275,7 @@ swiper {
   right: 0px;
   bottom: 0px;
   left: 0px;
-  height:424rpx;
+  height:433rpx;
   width: 100%;
   margin: auto;
 }

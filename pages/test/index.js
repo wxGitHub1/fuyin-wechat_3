@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    is_longin: false,
+    is_longin: true,
     swiperCurrent: 0,
     interval: 300,
     duration: 500,
@@ -164,36 +164,48 @@ Page({
         });
       }
     })
-    wx.checkSession({
-        success() {
-          //session_key 未过期，并且在本生命周期一直有效
-          that.setData({
-            is_longin: false
-          })
-        },
-        fail() {
-          // session_key 已经失效，需要重新执行登录流程
-          // wx.login() //重新登录
-          // var today = new Date();
-          // var today_time = that.FormatDate(today);
-          // console.log(today_time)
-          // if (today_time >= '2020-4-22') {console.log('活动已结束');}else{}
-          var thetime = '2020-04-23 12:00:00';
-          var d = new Date(Date.parse(thetime.replace(/-/g, "/")));
-          var curDate = new Date();
-          if (d <= curDate) {
-            that.setData({
-              is_longin: false
-            })
-          } else {
-            that.setData({
-              is_longin: true
-            })
-          }
-        }
-      }),
-      // console.log("app传输过来" + this.data.guide)
-      this.setNowDate();
+    var thetime = '2020-07-03 18:00:00';
+    var d = new Date(Date.parse(thetime.replace(/-/g, "/")));
+    var curDate = new Date();
+    if (d <= curDate) {
+      that.setData({
+        is_longin: false
+      })
+    } else {
+      that.setData({
+        is_longin: true
+      })
+    }
+    // wx.checkSession({
+    //     success() {
+    //       //session_key 未过期，并且在本生命周期一直有效
+    //       that.setData({
+    //         is_longin: true
+    //       })
+    //     },
+    //     fail() {
+    //       // session_key 已经失效，需要重新执行登录流程
+    //       // wx.login() //重新登录
+    //       // var today = new Date();
+    //       // var today_time = that.FormatDate(today);
+    //       // console.log(today_time)
+    //       // if (today_time >= '2020-4-22') {console.log('活动已结束');}else{}
+    //       // var thetime = '2020-07-01 06:00:00';
+    //       // var d = new Date(Date.parse(thetime.replace(/-/g, "/")));
+    //       // var curDate = new Date();
+    //       // if (d <= curDate) {
+    //       //   that.setData({
+    //       //     is_longin: false
+    //       //   })
+    //       // } else {
+    //       //   that.setData({
+    //       //     is_longin: true
+    //       //   })
+    //       // }
+    //     }
+    //   }),
+    // console.log("app传输过来" + this.data.guide)
+    this.setNowDate();
   },
   /**
    * 用户点击右上角分享
@@ -203,7 +215,7 @@ Page({
     return {
       title: '让每个孩子更健康的发育',
       path: '/pages/test/index?id=' + that.data.guide,
-      imageUrl: '/images/IMG_20200616_155844.jpg' //这个是分享的图片
+      imageUrl: '/images/2.png' //这个是分享的图片
     }
   },
   dateSelectAction: function (e) {
@@ -427,7 +439,7 @@ Page({
     // });
     var that = this
     wx.request({
-      url: 'http://192.168.1.108:10550/wx/getWxReserveDate', //app.globalData.serverUrl + 
+      url: app.globalData.serverUrl + '/wx/getWxReserveDate', //app.globalData.serverUrl + 
       method: "POST",
       data: {
         year: year,
