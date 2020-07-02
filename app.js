@@ -1,12 +1,13 @@
 //app.js
 App({
   globalData: {
-    serverUrl:"https://fuyinkangfu.com:8085",  // "https://fuyinkangfu.com:8055",
+    serverUrl:"https://fuyinkangfu.com:8055",
+    // serverUrl:"http://192.168.1.108:10550",                    
     guide:42,
     navHeight:null,
     navTop:null,
     windowHeight:null,
-    myPhone:null,
+    myPhone:17609121481,
   },
   onLaunch: function (q) {
     console.log(q.query.id != undefined)

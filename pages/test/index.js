@@ -164,7 +164,7 @@ Page({
         });
       }
     })
-    var thetime = '2020-07-03 18:00:00';
+    var thetime = '2020-07-01 18:00:00';
     var d = new Date(Date.parse(thetime.replace(/-/g, "/")));
     var curDate = new Date();
     if (d <= curDate) {

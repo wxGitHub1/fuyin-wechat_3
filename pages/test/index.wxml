@@ -6,7 +6,7 @@
 					<image src="{{imgUrls}}" class="prompt-top-image"></image>
 				</view>
 			</swiper-item> -->
-			<swiper-item class="swiper-2">
+			<swiper-item class="swiper-2 {{clientHeight<=736?'swiper-1-2':''}} ">
 				<video id="myVideo" src="https://fuyinkangfu.com:8085/files/wx/dinggaowenjian.mp4"></video>
 				<view class="prompt-top">
 					<image src="{{imgUrls}}" class="prompt-top-image"></image>
@@ -69,7 +69,7 @@
 					</view>
 					<!-- <view>点击日期选择</view> -->
 				</view>
-				<image src="/images/img_fgdjsfgkjdf.png" class="tit-img-2" mode="widthFix" ></image>
+				<image src="/images/address.png" class="tit-img-2" mode="widthFix" ></image>
 				<map class="map {{clientHeight>736?'map2':''}}" covers="{{covers}}" longitude="{{longitude}}" latitude="{{latitude}}" scale="16" show-compass="true">
 					<view class="cover-view">
 						<view class="flex-item demo-text-1" bindtap="daohang">导航</view>
